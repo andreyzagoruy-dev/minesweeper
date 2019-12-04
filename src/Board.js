@@ -1,12 +1,14 @@
 import React from 'react';
 import Cell from './Cell';
+import mouseImage from './mouse.svg';
+import { is } from '@babel/types';
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      markerdLeft: props.mines,
+      markersLeft: props.mines,
       isGameOver: false,
       isWon: false,
       board: null
@@ -17,6 +19,10 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
+    this.startGame();
+  }
+
+  startGame() {
     const emptyBoard = this.generateBoard();
     const boardWithMines = this.placeMines(emptyBoard);
     const boardWithValues = this.setValues(boardWithMines);
@@ -133,7 +139,7 @@ class Board extends React.Component {
   }
 
   handleCellClick(type, row, column) {
-    const { board, isGameOver } = this.state;
+    const { board, isGameOver, markersLeft } = this.state;
 
     if (isGameOver) {
       return;
@@ -151,10 +157,9 @@ class Board extends React.Component {
       }
     }
 
-    if (type === 'contextmenu') {
-      if (!isOpened) {
+    if (type === 'contextmenu' && !isOpened) {
+      if (cell.isMarked || markersLeft > 0)
         cell.isMarked = !cell.isMarked;
-      }
     }
 
     this.setState({
@@ -192,23 +197,45 @@ class Board extends React.Component {
 
   examineBoard() {
     const { board } = this.state;
+    const { mines } = this.props;
+    let markersLeft = null;
+    let isWon = false;
 
     const cells = board.flat();
     const cellsCount = cells.length;
     const numberOfMarked = cells.filter((cell) => cell.isMarked === true).length;
     const numberOfOpened = cells.filter((cell) => cell.isOpened === true).length;
 
+    markersLeft = mines - numberOfMarked;
+
     if (cellsCount === (numberOfMarked + numberOfOpened)) {
-      this.setState({
-        isWon: true
-      });
+      isWon = true;
     }
+
+    this.setState({
+      markersLeft,
+      isWon
+    });
   }
 
   render() {
+    const { isWon, isGameOver, markersLeft } = this.state;
+
     return (
       <div className="board">
-        {this.drawBoard()}
+        <div className="board__header">
+          {isWon && <span>You won!</span>}
+          {isGameOver && <span>You lost!</span>}
+          <span>Markers left: {markersLeft}</span>
+        </div>
+        <div className="board__content">
+          {this.drawBoard()}
+        </div>
+        <div className="board__footer">
+          <span>Open cell</span>
+          <img className="icon" src={mouseImage} alt=""></img>
+          <span>Mark mine</span>
+        </div>
       </div>
     );
   }
