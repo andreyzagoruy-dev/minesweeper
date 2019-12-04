@@ -157,8 +157,8 @@ class Board extends React.Component {
       }
     }
 
-    if (type === 'contextmenu' && !isOpened) {
-      if (cell.isMarked || markersLeft > 0)
+    if (type === 'contextmenu' && (!isOpened || isMarked)) {
+      if (isMarked || markersLeft > 0)
         cell.isMarked = !cell.isMarked;
     }
 
@@ -224,6 +224,7 @@ class Board extends React.Component {
     return (
       <div className="board">
         <div className="board__header">
+          <span className="back-button">←</span>
           {isWon && <span>You won!</span>}
           {isGameOver && <span>You lost!</span>}
           <span>Markers left: {markersLeft}</span>

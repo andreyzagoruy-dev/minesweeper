@@ -100,3 +100,9 @@ body {
   width: 1.5rem;
   margin: 0 0.5rem;
 }
+
+.back-button {
+  font-size: 1.5rem;
+  font-weight: 300;
+  width: 8rem;
+}
