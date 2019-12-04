@@ -1,22 +1,74 @@
-.App {
-  text-align: center;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  background-image: radial-gradient(circle, #762145, #631934, #4F1325, #3C0C17, #2B0507);
+  font-family: 'Roboto Mono', monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.minesweeper {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
 }
 
-.App-link {
-  color: #09d3ac;
+.board {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.cell {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: .25rem;
+  margin: .375rem;
+  color: rgba(255, 255, 255, .8);
+  font-size: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  font-weight: 300;
+}
+
+.cell--closed {
+  border-color: #FEFEFE;
+  font-size: 0;
+}
+
+.cell--marked {
+  border-color: #35D3D0;
+  font-size: 0;
+}
+
+.cell--marked::after {
+  content: '';
+  display: block;
+  width: .5rem;
+  height: .5rem;
+  border: 1px solid #35D3D0;
+  border-radius: 50%;
+}
+
+.cell--mine {
+  border-radius: 50%;
+  border-color: #EA3E6C;
+}
+
+.cell--empty {
+  border-color: #985C5C;
 }
