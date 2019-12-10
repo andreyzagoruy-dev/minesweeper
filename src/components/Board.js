@@ -60,7 +60,7 @@ class Board extends React.Component {
 
   placeMines(board) {
     let { mines, rows, columns } = this.props;
-    const boardWithMines = [...board];
+    const boardWithMines = JSON.parse(JSON.stringify(board));
 
     while (mines) {
       const row = Math.floor(Math.random() * rows);
@@ -77,7 +77,7 @@ class Board extends React.Component {
 
   setValues(board) {
     const { rows, columns } = this.props;
-    const boardWithValues = [...board];
+    const boardWithValues = JSON.parse(JSON.stringify(board));
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
@@ -139,7 +139,7 @@ class Board extends React.Component {
     const { board } = this.state;
     const { rows, columns } = this.props;
     
-    const updatedBoard = [...board];
+    const updatedBoard = JSON.parse(JSON.stringify(board));
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
@@ -160,7 +160,7 @@ class Board extends React.Component {
       return;
     }
 
-    let modifiedBoard = [...board];
+    let modifiedBoard = JSON.parse(JSON.stringify(board));
     const cell = modifiedBoard[row][column]
     const { isOpened, isMine, isMarked } = cell;
 
@@ -192,8 +192,7 @@ class Board extends React.Component {
       return board;
     }
 
-    const modifiedBoard = [...board];
-    const cell = modifiedBoard[row][column];
+    const cell = board[row][column];
 
     if (cell.isOpened) {
       return board;
@@ -202,13 +201,13 @@ class Board extends React.Component {
     cell.isOpened = true;
 
     if (!cell.value) {
-      this.openCell(modifiedBoard, row - 1, column);
-      this.openCell(modifiedBoard, row + 1, column);
-      this.openCell(modifiedBoard, row, column - 1);
-      this.openCell(modifiedBoard, row, column + 1);
+      this.openCell(board, row - 1, column);
+      this.openCell(board, row + 1, column);
+      this.openCell(board, row, column - 1);
+      this.openCell(board, row, column + 1);
     }
 
-    return modifiedBoard;
+    return board;
   }
 
   examineBoard() {
