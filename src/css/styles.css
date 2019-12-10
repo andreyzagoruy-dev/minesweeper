@@ -1,0 +1,202 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: radial-gradient(circle, #762145, #631934, #4F1325, #3C0C17, #2B0507);
+  font-family: 'Roboto Mono', monospace;
+  color: #FFFFFF;
+}
+
+.menu {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-title {
+  font-weight: 300;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.form-config {
+
+}
+
+.form-config__label {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.form-config__select {
+  display: block;
+  min-width: 16rem;
+  color: #FFFFFF;
+  padding: .75rem 2rem .875rem 1rem;
+  margin-top: .5rem;
+  outline: none;
+  font-weight: 300;
+  font-size: 1.5rem;
+  appearance: none;
+  border: 1px solid #FEFEFE;
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjQwLjgxMSAyNDAuODExIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNDAuODExIDI0MC44MTE7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIGNsYXNzPSIiPjxnPjxnPgoJPHBhdGggaWQ9IkV4cGFuZF9Nb3JlIiBkPSJNMjIwLjA4OCw1Ny42NjdsLTk5LjY3MSw5OS42OTVMMjAuNzQ2LDU3LjY1NWMtNC43NTItNC43NTItMTIuNDM5LTQuNzUyLTE3LjE5MSwwICAgYy00Ljc0LDQuNzUyLTQuNzQsMTIuNDUxLDAsMTcuMjAzbDEwOC4yNjEsMTA4LjI5N2wwLDBsMCwwYzQuNzQsNC43NTIsMTIuNDM5LDQuNzUyLDE3LjE3OSwwTDIzNy4yNTYsNzQuODU5ICAgYzQuNzQtNC43NTIsNC43NC0xMi40NjMsMC0xNy4yMTVDMjMyLjUyOCw1Mi45MTUsMjI0LjgyOCw1Mi45MTUsMjIwLjA4OCw1Ny42Njd6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIiBmaWxsPSIjRkZGRkZGIi8+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+CjwvZz48L2c+IDwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: right 1rem top 50%;
+  background-size: 1rem;
+  border-radius: .25rem;
+}
+
+.form-config__button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.button {
+  font-size: 1.5rem;
+  font-weight: 300;
+  border-radius: .25rem;
+  padding: .75rem 1rem;
+  min-width: 12rem;
+  cursor: pointer;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.button + .button {
+  margin-left: 1rem;
+}
+
+.button--primary {
+  background: none;
+}
+
+.button--secondary {
+  background: rgba(0, 0, 0, .3);
+}
+
+.button--icon {
+  border: none;
+  background: none;
+  padding: 0;
+  min-width: auto;
+}
+
+.minesweeper {
+  width: 95vw;
+  margin: 0 auto;
+}
+
+.board {
+  
+}
+
+.game-header {
+  border-bottom: 1px solid rgba(255, 255, 255, .8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+
+.game-header > * {
+  flex: 1;
+}
+
+.game-header__left {
+  text-align: left;
+}
+
+.game-header__center {
+  text-align: center;
+}
+
+.game-header__right {
+  text-align: right;
+}
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  min-height: calc(100vh - 8rem);
+}
+
+.game-footer {
+  border-top: 1px solid rgba(255, 255, 255, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+
+.game__button {
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: .25rem;
+  margin: .375rem;
+  color: rgba(255, 255, 255, .8);
+  font-size: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  font-weight: 300;
+}
+
+.cell--closed {
+  border-color: #FEFEFE;
+  font-size: 0;
+}
+
+.cell--marked {
+  border-color: #35D3D0;
+  font-size: 0;
+}
+
+.cell--marked::after {
+  content: '';
+  display: block;
+  width: .5rem;
+  height: .5rem;
+  border: 1px solid #35D3D0;
+  border-radius: 50%;
+}
+
+.cell--mine {
+  border-radius: 50%;
+  border-color: #EA3E6C;
+}
+
+.cell--empty {
+  border-color: #985C5C;
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0 0.5rem;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
-import mouseImage from './mouse.svg';
-import { is } from '@babel/types';
+import mouseImage from './../assets/mouse.svg';
 
 class Board extends React.Component {
   constructor(props) {
@@ -16,6 +15,8 @@ class Board extends React.Component {
 
     this.handleCellClick = this.handleCellClick.bind(this);
     this.openCell = this.openCell.bind(this);
+    this.goToMenu = this.goToMenu.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   componentDidMount() {
@@ -23,16 +24,19 @@ class Board extends React.Component {
   }
 
   startGame() {
-    const emptyBoard = this.generateBoard();
+    const emptyBoard = this.generateEmptyBoard();
     const boardWithMines = this.placeMines(emptyBoard);
     const boardWithValues = this.setValues(boardWithMines);
 
     this.setState({
-      board: boardWithValues
+      board: boardWithValues,
+      isGameOver: false,
+      isWon: false,
+      markersLeft: this.props.mines
     });
   }
 
-  generateBoard() {
+  generateEmptyBoard() {
     const { rows, columns } = this.props;
     const board = [];
 
@@ -135,7 +139,7 @@ class Board extends React.Component {
     this.setState({
       board: updatedBoard,
       isGameOver: true
-    })
+    });
   }
 
   handleCellClick(type, row, column) {
@@ -152,6 +156,7 @@ class Board extends React.Component {
     if (type === 'click' && !isMarked) {
       if (isMine) {
         this.endGame();
+        return;
       } else {
         modifiedBoard = this.openCell(modifiedBoard, row, column);
       }
@@ -207,7 +212,6 @@ class Board extends React.Component {
     const numberOfOpened = cells.filter((cell) => cell.isOpened === true).length;
 
     markersLeft = mines - numberOfMarked;
-
     if (cellsCount === (numberOfMarked + numberOfOpened)) {
       isWon = true;
     }
@@ -218,26 +222,46 @@ class Board extends React.Component {
     });
   }
 
+  goToMenu() {
+    const { changeGameState } = this.props;
+    changeGameState('menu');
+  }
+
   render() {
     const { isWon, isGameOver, markersLeft } = this.state;
+    const isGameRunning = !isGameOver && !isWon;
 
     return (
-      <div className="board">
-        <div className="board__header">
-          <span className="back-button">←</span>
-          {isWon && <span>You won!</span>}
-          {isGameOver && <span>You lost!</span>}
-          <span>Markers left: {markersLeft}</span>
+      <React.Fragment>
+        <div className="game-header">
+          <button className="button button--icon game-header__left" onClick={this.goToMenu}>←</button>
+          {isWon && <span className="game-header__center">You won!</span>}
+          {isGameOver && <span className="game-header__center">You lost!</span>}
+          <span className="game-header__right">Markers left: {markersLeft}</span>
         </div>
-        <div className="board__content">
+        <div className="game-content">
           {this.drawBoard()}
         </div>
-        <div className="board__footer">
-          <span>Open cell</span>
-          <img className="icon" src={mouseImage} alt=""></img>
-          <span>Mark mine</span>
+        <div className="game-footer">
+          {isGameRunning &&
+            <React.Fragment>
+              <span>Open cell</span>
+              <img className="icon" src={mouseImage} alt=""></img>
+              <span>Mark mine</span>
+            </React.Fragment>
+          }
+          {!isGameRunning && (
+            <React.Fragment>
+              <button className="button button--primary game__button" onClick={this.goToMenu}>
+                New Game
+              </button>
+              <button className="button button--secondary game__button" onClick={this.startGame}>
+                Restart
+              </button>
+            </React.Fragment>
+          )}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
