@@ -27,12 +27,15 @@ class Board extends React.Component {
     const emptyBoard = this.generateEmptyBoard();
     const boardWithMines = this.placeMines(emptyBoard);
     const boardWithValues = this.setValues(boardWithMines);
-
-    this.setState({
-      board: boardWithValues,
+    const initialBoardState = {
       isGameOver: false,
       isWon: false,
       markersLeft: this.props.mines
+    }
+
+    this.setState({
+      board: boardWithValues,
+      ...initialBoardState
     });
   }
 
