@@ -116,7 +116,15 @@ class Board extends React.Component {
         {board && board.map((row, rowIndex) => (
           <div className="row" key={'row_' + rowIndex}>
             {row.map((cell, cellIndex) => (
-              <Cell key={'cell_' + cellIndex} x={rowIndex} y={cellIndex} value={cell.value} isOpened={cell.isOpened} isMarked={cell.isMarked} isMine={cell.isMine} onCellClick={this.handleCellClick} />
+              <Cell
+                key={'cell_' + cellIndex}
+                x={rowIndex}
+                y={cellIndex}
+                value={cell.value}
+                isOpened={cell.isOpened}
+                isMarked={cell.isMarked}
+                isMine={cell.isMine}
+                onCellClick={this.handleCellClick} />
             ))}
           </div>
         ))}
@@ -234,10 +242,24 @@ class Board extends React.Component {
     return (
       <React.Fragment>
         <div className="game-header">
-          <button className="button button--icon game-header__left" onClick={this.goToMenu}>←</button>
-          {isWon && <span className="game-header__center">You won!</span>}
-          {isGameOver && <span className="game-header__center">You lost!</span>}
-          <span className="game-header__right">Markers left: {markersLeft}</span>
+          <button
+            className="button button--icon game-header__left"
+            onClick={this.goToMenu}>
+              ←
+          </button>
+          {isWon && (
+            <span className="game-header__center">
+              You won!
+            </span>
+          )}
+          {isGameOver && (
+            <span className="game-header__center">
+              You lost!
+            </span>
+          )}
+          <span className="game-header__right">
+            Markers left: {markersLeft}
+          </span>
         </div>
         <div className="game-content">
           {this.drawBoard()}
@@ -252,11 +274,15 @@ class Board extends React.Component {
           }
           {!isGameRunning && (
             <React.Fragment>
-              <button className="button button--primary game__button" onClick={this.goToMenu}>
-                New Game
+              <button
+                className="button button--primary game__button"
+                onClick={this.goToMenu}>
+                  New Game
               </button>
-              <button className="button button--secondary game__button" onClick={this.startGame}>
-                Restart
+              <button
+                className="button button--secondary game__button"
+                onClick={this.startGame}>
+                  Restart
               </button>
             </React.Fragment>
           )}

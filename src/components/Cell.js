@@ -39,7 +39,12 @@ class Cell extends React.Component {
   render() {
     const { value } = this.props;
     return (
-      <div className={`cell ${this.getCellModifier()}`} onClick={this.handleClick} onContextMenu={this.handleClick}>{value}</div>
+      <div
+        className={`cell ${this.getCellModifier()}`}
+        onClick={this.handleClick}
+        onContextMenu={this.handleClick}>
+          {value}
+      </div>
     );
   }
 }

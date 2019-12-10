@@ -40,7 +40,13 @@ class Minesweeper extends React.Component {
     return (
       <div className="minesweeper">
           {isMenu && <Menu startGame={this.startGame} />}
-          {isGame && <Board rows={config.size} columns={config.size} mines={config.difficulty} changeGameState={this.changeGameState} />}
+          {isGame && (
+            <Board
+              rows={config.size}
+              columns={config.size}
+              mines={config.difficulty}
+              changeGameState={this.changeGameState} />
+          )}
       </div>
     );
   }
