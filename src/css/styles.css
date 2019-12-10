@@ -59,7 +59,7 @@ body {
 .form-config__button {
   display: block;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .button {
@@ -96,10 +96,6 @@ body {
 .minesweeper {
   width: 95vw;
   margin: 0 auto;
-}
-
-.board {
-  
 }
 
 .game-header {
