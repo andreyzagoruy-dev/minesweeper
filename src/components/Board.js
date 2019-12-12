@@ -6,11 +6,16 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    // Also used when restarting game inside startGame() function
+    this.initialBoardState = {
       markersLeft: props.mines,
       isGameOver: false,
       isWon: false,
       board: null
+    }
+
+    this.state = {
+      ...this.initialBoardState
     }
 
     this.handleCellClick = this.handleCellClick.bind(this);
@@ -27,15 +32,10 @@ class Board extends React.Component {
     const emptyBoard = this.generateEmptyBoard();
     const boardWithMines = this.placeMines(emptyBoard);
     const boardWithValues = this.setValues(boardWithMines);
-    const initialBoardState = {
-      isGameOver: false,
-      isWon: false,
-      markersLeft: this.props.mines
-    }
 
     this.setState({
-      board: boardWithValues,
-      ...initialBoardState
+      ...this.initialBoardState,
+      board: boardWithValues
     });
   }
 
@@ -68,7 +68,7 @@ class Board extends React.Component {
 
       if (!boardWithMines[row][column].isMine) {
         boardWithMines[row][column].isMine = true;
-        mines = mines - 1;
+        mines--;
       }
     }
 

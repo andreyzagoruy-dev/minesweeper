@@ -20,18 +20,10 @@ class Cell extends React.Component {
   getCellModifier() {
     const { value, isOpened, isMarked, isMine } = this.props;
 
-    if (isMarked) {
-      return 'cell--marked';
-    }
-    if (isMine && isOpened) {
-      return 'cell--mine';
-    }
-    if (!isMarked && isOpened && !value) {
-      return 'cell--empty';
-    }
-    if (!isOpened) {
-      return 'cell--closed';
-    }
+    if (isMarked) return 'cell--marked';
+    if (isMine && isOpened) return 'cell--mine';
+    if (!isMarked && isOpened && !value) return 'cell--empty';
+    if (!isOpened) return 'cell--closed';
 
     return '';
   }
